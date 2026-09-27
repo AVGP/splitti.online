@@ -93,6 +93,7 @@
   </div>
 
   <script>
+    window.AUTO_OPEN_FOLDER = {% if autoOpenFolder %}{{ autoOpenFolder | jsonify | safe }}{% else %}null{% endif %};
     window.AUTO_OPEN_SLUG = {% if page.fileSlug and page.fileSlug != 'index' and page.fileSlug != 'src' %}{{ page.fileSlug | jsonify | safe }}{% else %}null{% endif %};
     window.WIN98_DESKTOP = {{ desktop | jsonify | safe }};
     window.WIN98_DATA = {

@@ -6,20 +6,27 @@ class ExplorerApp {
     this.data = window.WIN98_DATA || {};
   }
 
-  updateUrlHash(slug) {
-    if (!slug) return;
-    if (history.replaceState) {
-      history.replaceState(null, '', '#' + slug);
-    } else {
-      window.location.hash = '#' + slug;
+  updateUrlPath(url, isReplace = false) {
+    if (!url) return;
+    if (window.location.pathname === url) return;
+    try {
+      if (isReplace) {
+        history.replaceState({ url }, '', url);
+      } else {
+        history.pushState({ url }, '', url);
+      }
+    } catch (err) {
+      console.warn("History pushState failed:", err);
     }
   }
 
-  openFolder(folderId) {
+  openFolder(folderId, skipHistory = false) {
     const folderMeta = (window.WIN98_DESKTOP?.folders || []).find(f => f.id === folderId);
     if (!folderMeta) return;
 
-    this.updateUrlHash(folderId);
+    if (!skipHistory) {
+      this.updateUrlPath(`/content/${folderId}/`);
+    }
 
     const items = this.data[folderMeta.collection] || [];
     const windowId = `folder-${folderId}`;
@@ -115,25 +122,25 @@ class ExplorerApp {
     }
   }
 
-  openFile(folderId, index) {
+  openFile(folderId, index, skipHistory = false) {
     const items = this.data[folderId] || [];
     const item = items[index];
     if (!item) return;
 
-    if (item.slug) {
-      this.updateUrlHash(item.slug);
+    if (item.url && !skipHistory) {
+      this.updateUrlPath(item.url);
     }
 
     if (folderId === "photos" || item.image) {
-      this.openPhotoViewer(items, index);
+      this.openPhotoViewer(items, index, skipHistory);
     } else {
-      this.openNotepad(item);
+      this.openNotepad(item, skipHistory);
     }
   }
 
-  openNotepad(item) {
-    if (item.slug) {
-      this.updateUrlHash(item.slug);
+  openNotepad(item, skipHistory = false) {
+    if (item.url && !skipHistory) {
+      this.updateUrlPath(item.url);
     }
 
     const windowId = `notepad-${item.title.replace(/[^a-zA-Z0-9]/g, "-")}`;
@@ -165,12 +172,12 @@ ${item.bodyHtml || item.rawContent}
     });
   }
 
-  openPhotoViewer(items, currentIndex) {
+  openPhotoViewer(items, currentIndex, skipHistory = false) {
     const item = items[currentIndex];
     if (!item) return;
 
-    if (item.slug) {
-      this.updateUrlHash(item.slug);
+    if (item.url && !skipHistory) {
+      this.updateUrlPath(item.url);
     }
 
     const windowId = `photo-viewer`;
@@ -303,56 +310,48 @@ ${item.bodyHtml || item.rawContent}
   }
 
   openFromUrl() {
-    let target = window.AUTO_OPEN_SLUG;
+    const pathname = window.location.pathname;
 
-    const urlParams = new URLSearchParams(window.location.search);
-    const queryTarget = urlParams.get('file') || urlParams.get('open') || urlParams.get('photo') || urlParams.get('doc') || urlParams.get('folder');
-    if (queryTarget) {
-      target = queryTarget;
-    }
-
-    if (!queryTarget && window.location.hash) {
-      const hashVal = window.location.hash.replace(/^#\/?/, '');
-      if (hashVal) {
-        target = hashVal;
-      }
-    }
-
-    if (!target && window.location.pathname) {
-      const pathParts = window.location.pathname.split('/').filter(Boolean);
-      if (pathParts.length > 0) {
-        const lastPart = pathParts[pathParts.length - 1];
-        if (lastPart && lastPart !== 'index.html' && lastPart !== 'splendid-hopper') {
-          target = lastPart;
-        }
-      }
-    }
-
-    if (!target || target === 'index' || target === 'null') {
-      this.openFolder('documents');
+    // 1. Check window.AUTO_OPEN_FOLDER
+    if (window.AUTO_OPEN_FOLDER && ['photos', 'diary', 'documents'].includes(window.AUTO_OPEN_FOLDER)) {
+      this.openFolder(window.AUTO_OPEN_FOLDER, true);
       return;
     }
 
-    const lowerTarget = target.toLowerCase();
-    if (['photos', 'diary', 'documents'].includes(lowerTarget)) {
-      this.openFolder(lowerTarget);
+    // 2. Check path for folder level routes
+    const cleanPath = pathname.replace(/\/+$/, '');
+    if (cleanPath === '/content/photos' || cleanPath === '/photos') {
+      this.openFolder('photos', true);
+      return;
+    }
+    if (cleanPath === '/content/diary' || cleanPath === '/diary') {
+      this.openFolder('diary', true);
+      return;
+    }
+    if (cleanPath === '/content/documents' || cleanPath === '/documents') {
+      this.openFolder('documents', true);
       return;
     }
 
+    // 3. Search collections for item match by url or slug
     const collections = ['photos', 'diary', 'documents'];
     let foundCollection = null;
     let foundIndex = -1;
-
-    const normalizedTarget = lowerTarget.replace(/[^a-z0-9]/g, '');
 
     for (const col of collections) {
       const list = this.data[col] || [];
       const idx = list.findIndex(item => {
         if (!item) return false;
-        const slugNorm = (item.slug || '').toLowerCase().replace(/[^a-z0-9]/g, '');
-        const titleNorm = (item.title || '').toLowerCase().replace(/[^a-z0-9]/g, '');
-        const urlNorm = (item.url || '').toLowerCase().replace(/[^a-z0-9]/g, '');
-        return slugNorm === normalizedTarget || titleNorm === normalizedTarget || (urlNorm && urlNorm.includes(normalizedTarget));
+        if (item.url && (pathname === item.url || cleanPath === item.url.replace(/\/+$/, ''))) {
+          return true;
+        }
+        if (item.slug && cleanPath.endsWith('/' + item.slug)) {
+          return true;
+        }
+        if (window.AUTO_OPEN_SLUG && item.slug === window.AUTO_OPEN_SLUG) {
+          return true;
+        }
+        return false;
       });
 
       if (idx !== -1) {
@@ -363,10 +362,11 @@ ${item.bodyHtml || item.rawContent}
     }
 
     if (foundCollection && foundIndex !== -1) {
-      this.openFolder(foundCollection);
-      this.openFile(foundCollection, foundIndex);
+      this.openFolder(foundCollection, true);
+      this.openFile(foundCollection, foundIndex, true);
     } else {
-      this.openFolder('documents');
+      // Default initial view: open My Documents folder
+      this.openFolder('documents', true);
     }
   }
 }
@@ -374,7 +374,7 @@ ${item.bodyHtml || item.rawContent}
 document.addEventListener("DOMContentLoaded", () => {
   window.Explorer = new ExplorerApp();
 
-  window.addEventListener('hashchange', () => {
+  window.addEventListener('popstate', () => {
     if (window.Explorer) {
       window.Explorer.openFromUrl();
     }
