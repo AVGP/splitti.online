@@ -480,6 +480,14 @@ html, body {
   height: 20px;
 }
 
+.start-icon-avatar {
+  width: 18px;
+  height: 18px;
+  object-fit: cover;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
 .start-menu-divider {
   height: 1px;
   margin: 3px 2px;
