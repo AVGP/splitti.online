@@ -1,32 +1,30 @@
 ---
 title: HOT_LINKS.TXT - Favorite Web Sites
 date: 1998-09-01
-author: Alex
+author: Martin
 category: Bookmarks
 tags: documents
 icon: /assets/images/icons/file-text.svg
 ---
 
 ===================================================================
-             MY FAVORITE INTERNET BOOKMARKS (1998)
+             MY FAVORITE INTERNET BOOKMARKS (2026)
 ===================================================================
 
-1. AltaVista Search Engine
-   http://www.altavista.digital.com
-   Fastest search engine on the web!
+1. XKCD
+   [https://xkcd.com](https://xkcd.com)
+   A web comic for everything :D
 
-2. GeoCities Neighborhoods
-   http://www.geocities.com/SiliconValley/Peaks/4902/
-   Home of custom web pages, glowing text, and GIF animations!
+2. That's a website
+   [https://thatsaweb.site](https://thatsaweb.site)
+   The blog Eva and I write together, so much fun!
 
-3. GameFAQs
-   http://www.gamefaqs.com
-   Text-file walkthroughs and codes for N64 and PlayStation games.
+3. Zines Forever
+   [https://zinesforever.com](https://zinesforever.com)
+   A collection of zines and a web tool to make your own and share with others
 
-4. Winamp.com Skins Vault
-   http://www.winamp.com
-   Download top 10 custom skins for Winamp 2.0.
+4. Lomography
+   [https://www.lomography.com](https://www.lomography.com)
+   A company and website where people embrace low-quality photography. It is so much fun to just snap and share
 
-5. Hamster Dance
-   http://www.hamsterdance.com
-   Most addicting song on the entire web!
+Have a cool website? Show me! Email me at my-first-name [at] this domain :)
