@@ -102,10 +102,13 @@ html, body {
   cursor: pointer;
   border: 1px transparent solid;
   border-radius: 2px;
+  -webkit-tap-highlight-color: transparent;
 }
 
-.desktop-icon:hover {
-  background-color: rgba(0, 0, 128, 0.2);
+@media (hover: hover) {
+  .desktop-icon:hover {
+    background-color: rgba(0, 0, 128, 0.2);
+  }
 }
 
 .desktop-icon.selected {

@@ -66,22 +66,22 @@ class ExplorerApp {
     if (gridEl) {
       gridEl.addEventListener("click", (e) => {
         const itemEl = e.target.closest(".file-item");
-        if (!itemEl) return;
-
-        // Selection highlight
         gridEl.querySelectorAll(".file-item").forEach(el => el.classList.remove("selected"));
-        itemEl.classList.add("selected");
+        if (itemEl) {
+          itemEl.classList.add("selected");
+        }
       });
 
       gridEl.addEventListener("dblclick", (e) => {
         const itemEl = e.target.closest(".file-item");
         if (!itemEl) return;
 
+        gridEl.querySelectorAll(".file-item").forEach(el => el.classList.remove("selected"));
         const idx = parseInt(itemEl.dataset.index, 10);
         this.openFile(folderId, idx);
       });
 
-      // Mobile single tap support
+      // Mobile touch support
       let lastTap = 0;
       gridEl.addEventListener("touchend", (e) => {
         const itemEl = e.target.closest(".file-item");
@@ -90,13 +90,14 @@ class ExplorerApp {
         const currentTime = new Date().getTime();
         const tapLength = currentTime - lastTap;
 
-        gridEl.querySelectorAll(".file-item").forEach(el => el.classList.remove("selected"));
-        itemEl.classList.add("selected");
-
         if (tapLength < 400 && tapLength > 0) {
+          gridEl.querySelectorAll(".file-item").forEach(el => el.classList.remove("selected"));
           const idx = parseInt(itemEl.dataset.index, 10);
           this.openFile(folderId, idx);
           e.preventDefault();
+        } else {
+          gridEl.querySelectorAll(".file-item").forEach(el => el.classList.remove("selected"));
+          itemEl.classList.add("selected");
         }
         lastTap = currentTime;
       });

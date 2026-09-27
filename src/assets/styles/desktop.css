@@ -96,10 +96,13 @@
   cursor: pointer;
   border: 1px transparent solid;
   border-radius: 2px;
+  -webkit-tap-highlight-color: transparent;
 }
 
-.file-item:hover {
-  background-color: rgba(0, 0, 128, 0.1);
+@media (hover: hover) {
+  .file-item:hover {
+    background-color: rgba(0, 0, 128, 0.1);
+  }
 }
 
 .file-item.selected {

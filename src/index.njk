@@ -9,8 +9,7 @@ title: Splitti OS 98 Desktop
     {% for folder in desktop.folders %}
     <div class="desktop-icon" 
          id="shortcut-{{ folder.id }}" 
-         ondblclick="window.Explorer.openFolder('{{ folder.id }}')"
-         onclick="this.classList.toggle('selected')">
+         ondblclick="window.Explorer.openFolder('{{ folder.id }}')">
       <img src="{{ folder.icon }}" alt="{{ folder.title }}" />
       <span class="icon-title">{{ folder.title }}</span>
     </div>
@@ -19,8 +18,7 @@ title: Splitti OS 98 Desktop
     {% for shortcut in desktop.systemShortcuts %}
     <div class="desktop-icon" 
          id="shortcut-{{ shortcut.id }}" 
-         ondblclick="window.Explorer.openSystemDialog('{{ shortcut.action }}')"
-         onclick="this.classList.toggle('selected')">
+         ondblclick="window.Explorer.openSystemDialog('{{ shortcut.action }}')">
       <img src="{{ shortcut.icon }}" alt="{{ shortcut.title }}" />
       <span class="icon-title">{{ shortcut.title }}</span>
     </div>
@@ -88,22 +86,61 @@ title: Splitti OS 98 Desktop
 </div>
 
 <script>
-  // Add mobile touch tap listener to desktop shortcuts
   document.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('.desktop-icon').forEach(icon => {
+    const desktopIcons = document.querySelectorAll('.desktop-icon');
+    const viewport = document.getElementById('desktop-viewport');
+
+    const clearAllSelection = () => {
+      desktopIcons.forEach(i => i.classList.remove('selected'));
+    };
+
+    // Deselect icons when tapping on desktop background
+    if (viewport) {
+      viewport.addEventListener('click', (e) => {
+        if (e.target.id === 'desktop-viewport' || e.target.classList.contains('desktop-shortcuts')) {
+          clearAllSelection();
+        }
+      });
+      viewport.addEventListener('touchend', (e) => {
+        if (e.target.id === 'desktop-viewport' || e.target.classList.contains('desktop-shortcuts')) {
+          clearAllSelection();
+        }
+      });
+    }
+
+    desktopIcons.forEach(icon => {
       let lastTap = 0;
+
+      // Single click selection
+      icon.addEventListener('click', (e) => {
+        e.stopPropagation();
+        clearAllSelection();
+        icon.classList.add('selected');
+      });
+
+      // Double-click opening clears selection
+      icon.addEventListener('dblclick', () => {
+        clearAllSelection();
+      });
+
+      // Touch tap support
       icon.addEventListener('touchend', (e) => {
         const currentTime = new Date().getTime();
         const tapLength = currentTime - lastTap;
+        
         if (tapLength < 400 && tapLength > 0) {
+          clearAllSelection();
           icon.dispatchEvent(new Event('dblclick'));
           e.preventDefault();
+        } else {
+          clearAllSelection();
+          icon.classList.add('selected');
         }
         lastTap = currentTime;
       });
     });
     
-    // Automatically open Welcome Readme or My Documents on initial load for a great experience
+    // Automatically open Welcome Readme or My Documents on initial load
     setTimeout(() => {
       if (window.Explorer) {
         window.Explorer.openFolder('documents');
