@@ -1,14 +1,21 @@
 ---
-title: Stage Discussion
+title: Stage Talk & Q&A
 date: 2002-10-09
 image: /assets/images/photo3_presentation.jpg
-caption: Answering questions on stage during technical talk
-location: Conference Hall B
-camera: Digicam 2002 Edition
+caption: Stage talk and Q&A session next to podium and laptop
+location: Auditorium Stage
+camera: Digicam 2002 Vintage (sRGB ICC)
+exif: sRGB ICC Profile (EXIF camera tags stripped on upload)
 tags: photos
 icon: /assets/images/icons/file-image.svg
 ---
 
-### Technical Talk
+### Stage Presentation & Discussion
 
-Explaining open web concepts and answering attendee questions during the afternoon session.
+Martin wearing a blue graphic t-shirt, gesturing on stage next to the presentation podium and laptop while answering audience questions.
+
+**EXIF Metadata Status:**
+- **Color Space:** sRGB ICC Profile
+- **Profile Copyright:** Google Inc. 2016
+- **Camera EXIF Note:** File headers contain sRGB profile; camera model and shutter/exposure tags were stripped during upload.
+- **Digicam Filter:** 1997–2003 compact digital CCD sensor modulation and JPEG 4:2:0 compression applied.

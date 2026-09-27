@@ -24,6 +24,7 @@
           caption: {{ item.data.caption | jsonify | safe }},
           location: {{ item.data.location | jsonify | safe }},
           camera: {{ item.data.camera | jsonify | safe }},
+          exif: {{ item.data.exif | jsonify | safe }},
           icon: {{ item.data.icon | jsonify | safe }},
           bodyHtml: {{ item.templateContent | jsonify | safe }}
         }{% if not loop.last %},{% endif %}

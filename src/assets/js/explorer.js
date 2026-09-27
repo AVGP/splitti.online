@@ -167,11 +167,12 @@ ${item.bodyHtml || item.rawContent}
         <div class="photo-details-panel">
           <div>
             <strong>Title:</strong> ${item.title}<br/>
-            <strong>Date:</strong> ${item.date || '1998'}
+            <strong>Date:</strong> ${item.date || 'N/A'}<br/>
+            <strong>Location:</strong> ${item.location || 'Unknown'}
           </div>
           <div style="text-align: right;">
-            <strong>Camera:</strong> ${item.camera || 'Kodak 35mm'}<br/>
-            <strong>Location:</strong> ${item.location || 'Unknown'}
+            <strong>Camera:</strong> ${item.camera || 'Digicam'}<br/>
+            <strong>EXIF Status:</strong> ${item.exif || 'sRGB ICC Profile'}
           </div>
         </div>
       </div>
