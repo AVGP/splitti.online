@@ -1,7 +1,7 @@
 module.exports = {
   wallpaper: "#008080",
   systemName: "Splitti OS 98 Second Edition",
-  user: "Alex",
+  user: "Martin",
   folders: [
     {
       id: "photos",
