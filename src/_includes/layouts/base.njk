@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="description" content="A retro Splitti OS 98 desktop environment built with Eleventy (11ty) and Markdown.">
+  <title>Splitti OS 98 Desktop</title>
+  <link rel="stylesheet" href="/assets/styles/win98.css">
+  <link rel="stylesheet" href="/assets/styles/desktop.css">
+</head>
+<body>
+
+  {{ content | safe }}
+
+  <script>
+    window.WIN98_DESKTOP = {{ desktop | jsonify | safe }};
+    window.WIN98_DATA = {
+      photos: [
+        {% for item in collections.photos %}
+        {
+          title: {{ item.data.title | jsonify | safe }},
+          date: {{ item.data.date | formatDate | jsonify | safe }},
+          image: {{ item.data.image | jsonify | safe }},
+          caption: {{ item.data.caption | jsonify | safe }},
+          location: {{ item.data.location | jsonify | safe }},
+          camera: {{ item.data.camera | jsonify | safe }},
+          icon: {{ item.data.icon | jsonify | safe }},
+          bodyHtml: {{ item.templateContent | jsonify | safe }}
+        }{% if not loop.last %},{% endif %}
+        {% endfor %}
+      ],
+      diary: [
+        {% for item in collections.diary %}
+        {
+          title: {{ item.data.title | jsonify | safe }},
+          date: {{ item.data.date | formatDate | jsonify | safe }},
+          mood: {{ item.data.mood | jsonify | safe }},
+          weather: {{ item.data.weather | jsonify | safe }},
+          icon: {{ item.data.icon | jsonify | safe }},
+          bodyHtml: {{ item.templateContent | jsonify | safe }}
+        }{% if not loop.last %},{% endif %}
+        {% endfor %}
+      ],
+      documents: [
+        {% for item in collections.documents %}
+        {
+          title: {{ item.data.title | jsonify | safe }},
+          date: {{ item.data.date | formatDate | jsonify | safe }},
+          author: {{ item.data.author | jsonify | safe }},
+          icon: {{ item.data.icon | jsonify | safe }},
+          bodyHtml: {{ item.templateContent | jsonify | safe }}
+        }{% if not loop.last %},{% endif %}
+        {% endfor %}
+      ]
+    };
+  </script>
+  <script src="/assets/js/window-manager.js"></script>
+  <script src="/assets/js/taskbar.js"></script>
+  <script src="/assets/js/explorer.js"></script>
+</body>
+</html>

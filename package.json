@@ -1,0 +1,17 @@
+{
+  "name": "win98-eleventy-desktop",
+  "version": "1.0.0",
+  "description": "A responsive Windows 98 Desktop website powered by Eleventy (11ty)",
+  "main": "index.js",
+  "scripts": {
+    "build": "npx @11ty/eleventy",
+    "start": "npx @11ty/eleventy --serve",
+    "debug": "DEBUG=Eleventy* npx @11ty/eleventy"
+  },
+  "keywords": ["eleventy", "win98", "retro", "desktop", "markdown"],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@11ty/eleventy": "^3.0.0"
+  }
+}

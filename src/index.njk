@@ -1,0 +1,113 @@
+---
+layout: layouts/base.njk
+title: Splitti OS 98 Desktop
+---
+
+<div id="desktop-viewport">
+  <!-- Desktop Icon Shortcuts -->
+  <div class="desktop-shortcuts">
+    {% for folder in desktop.folders %}
+    <div class="desktop-icon" 
+         id="shortcut-{{ folder.id }}" 
+         ondblclick="window.Explorer.openFolder('{{ folder.id }}')"
+         onclick="this.classList.toggle('selected')">
+      <img src="{{ folder.icon }}" alt="{{ folder.title }}" />
+      <span class="icon-title">{{ folder.title }}</span>
+    </div>
+    {% endfor %}
+
+    {% for shortcut in desktop.systemShortcuts %}
+    <div class="desktop-icon" 
+         id="shortcut-{{ shortcut.id }}" 
+         ondblclick="window.Explorer.openSystemDialog('{{ shortcut.action }}')"
+         onclick="this.classList.toggle('selected')">
+      <img src="{{ shortcut.icon }}" alt="{{ shortcut.title }}" />
+      <span class="icon-title">{{ shortcut.title }}</span>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+<!-- Start Menu Popup -->
+<div id="start-menu" class="win-outset">
+  <div class="start-menu-sidebar">
+    <span>Splitti OS</span>98
+  </div>
+  <div class="start-menu-items">
+    <div class="start-menu-item" onclick="window.Explorer.openFolder('photos'); window.Taskbar.closeStartMenu();">
+      <img src="/assets/images/icons/folder-photos.svg" alt="" />
+      <span>My Photos</span>
+    </div>
+    <div class="start-menu-item" onclick="window.Explorer.openFolder('diary'); window.Taskbar.closeStartMenu();">
+      <img src="/assets/images/icons/folder-diary.svg" alt="" />
+      <span>My Diary</span>
+    </div>
+    <div class="start-menu-item" onclick="window.Explorer.openFolder('documents'); window.Taskbar.closeStartMenu();">
+      <img src="/assets/images/icons/folder-docs.svg" alt="" />
+      <span>My Documents</span>
+    </div>
+    <div class="start-menu-divider"></div>
+    <div class="start-menu-item" onclick="window.Explorer.openSystemDialog('system-info'); window.Taskbar.closeStartMenu();">
+      <img src="/assets/images/icons/computer.svg" alt="" />
+      <span>System Properties</span>
+    </div>
+    <div class="start-menu-item" onclick="window.Explorer.openFile('documents', 0); window.Taskbar.closeStartMenu();">
+      <img src="/assets/images/icons/file-text.svg" alt="" />
+      <span>Readme Notes</span>
+    </div>
+    <div class="start-menu-divider"></div>
+    <div class="start-menu-item" onclick="alert('It is now safe to turn off your computer.'); window.Taskbar.closeStartMenu();">
+      <img src="/assets/images/icons/start-flag.svg" alt="" />
+      <span>Shut Down...</span>
+    </div>
+  </div>
+</div>
+
+<!-- Bottom Splitti OS 98 Taskbar -->
+<div id="taskbar" class="win-outset">
+  <div class="start-button-wrapper">
+    <button id="start-btn" class="start-btn">
+      <img src="/assets/images/icons/start-flag.svg" alt="Start" />
+      <span>Start</span>
+    </button>
+  </div>
+
+  <div id="taskbar-tasks" class="taskbar-tasks">
+    <!-- Dynamic task buttons populated by Window Manager -->
+  </div>
+
+  <div class="system-tray win-inset-flat">
+    <div class="tray-icon" title="Network Connection - 56k Active">
+      <img id="tray-net-icon" src="/assets/images/icons/net-idle.svg" alt="Network" />
+    </div>
+    <div class="tray-icon" title="Audio Volume">
+      <img src="/assets/images/icons/sound.svg" alt="Volume" />
+    </div>
+    <div id="tray-clock" class="tray-clock" title="Click for Date">--:--</div>
+  </div>
+</div>
+
+<script>
+  // Add mobile touch tap listener to desktop shortcuts
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.desktop-icon').forEach(icon => {
+      let lastTap = 0;
+      icon.addEventListener('touchend', (e) => {
+        const currentTime = new Date().getTime();
+        const tapLength = currentTime - lastTap;
+        if (tapLength < 400 && tapLength > 0) {
+          icon.dispatchEvent(new Event('dblclick'));
+          e.preventDefault();
+        }
+        lastTap = currentTime;
+      });
+    });
+    
+    // Automatically open Welcome Readme or My Documents on initial load for a great experience
+    setTimeout(() => {
+      if (window.Explorer) {
+        window.Explorer.openFolder('documents');
+      }
+    }, 500);
+  });
+</script>

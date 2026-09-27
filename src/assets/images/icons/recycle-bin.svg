@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" shape-rendering="crispEdges">
+  <!-- Bin Top Rim -->
+  <ellipse cx="16" cy="7" rx="11" ry="3" fill="#D4D0C8" stroke="#000" stroke-width="1"/>
+  <!-- Bin Body -->
+  <path d="M6,7 L8,27 H24 L26,7 Z" fill="#808080" stroke="#000" stroke-width="1"/>
+  <path d="M8,8 L9,26 H23 L24,8 Z" fill="#C0C0C0" />
+  <!-- Mesh lines -->
+  <line x1="12" y1="9" x2="12" y2="25" stroke="#808080" stroke-width="1"/>
+  <line x1="16" y1="9" x2="16" y2="25" stroke="#808080" stroke-width="1"/>
+  <line x1="20" y1="9" x2="20" y2="25" stroke="#808080" stroke-width="1"/>
+  <!-- Paper trash in bin -->
+  <polygon points="12,11 17,9 15,14" fill="#FFFFFF" stroke="#808080" stroke-width="0.5"/>
+</svg>

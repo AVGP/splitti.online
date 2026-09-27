@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" shape-rendering="crispEdges">
+  <!-- Windows 98 4-color flag -->
+  <!-- Top Left: Red -->
+  <path d="M1,2 H7 V7 H1 Z" fill="#FF4B4B" />
+  <!-- Top Right: Green -->
+  <path d="M8,2 H14 V7 H8 Z" fill="#70C837" />
+  <!-- Bottom Left: Blue -->
+  <path d="M1,8 H7 V13 H1 Z" fill="#00A3F6" />
+  <!-- Bottom Right: Yellow -->
+  <path d="M8,8 H14 V13 H8 Z" fill="#FFC800" />
+</svg>

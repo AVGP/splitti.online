@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" shape-rendering="crispEdges">
+  <!-- Folder -->
+  <path d="M2,7 H13 V10 H2 Z" fill="#FFF38D" />
+  <path d="M1,9 H30 V25 H1 Z" fill="#F0C430" />
+  <path d="M1,9 H30 V10 H1 Z" fill="#FFF495" />
+  <path d="M1,9 H2 V25 H1 Z" fill="#FFF495" />
+  <path d="M2,24 H29 V25 H2 Z" fill="#806000" />
+  <path d="M29,10 H30 V25 H29 Z" fill="#806000" />
+  <!-- Photo Badge / Polaroid -->
+  <rect x="14" y="13" width="14" height="11" fill="#FFFFFF" stroke="#000" stroke-width="1"/>
+  <rect x="16" y="15" width="10" height="6" fill="#3B82F6" />
+  <circle cx="23" cy="17" r="1.5" fill="#FBBF24" />
+</svg>
