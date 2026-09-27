@@ -366,7 +366,7 @@ ${item.bodyHtml || item.rawContent}
       this.openFile(foundCollection, foundIndex, true);
     } else {
       // Default initial view: open My Documents folder
-      this.openFolder('documents', true);
+     //this.openFolder('documents', true);
     }
   }
 }
