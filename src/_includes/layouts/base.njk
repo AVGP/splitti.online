@@ -4,20 +4,103 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="description" content="A retro Splitti OS 98 desktop environment built with Eleventy (11ty) and Markdown.">
-  <title>Splitti OS 98 Desktop</title>
+  <title>Splitti OS 98 Desktop{% if title and title != "Splitti OS 98 Desktop" %} - {{ title }}{% endif %}</title>
   <link rel="stylesheet" href="/assets/styles/win98.css">
   <link rel="stylesheet" href="/assets/styles/desktop.css">
 </head>
 <body>
 
-  {{ content | safe }}
+  <div id="desktop-viewport">
+    <!-- Desktop Icon Shortcuts -->
+    <div class="desktop-shortcuts">
+      {% for folder in desktop.folders %}
+      <div class="desktop-icon" 
+           id="shortcut-{{ folder.id }}" 
+           ondblclick="window.Explorer.openFolder('{{ folder.id }}')">
+        <img src="{{ folder.icon }}" alt="{{ folder.title }}" />
+        <span class="icon-title">{{ folder.title }}</span>
+      </div>
+      {% endfor %}
+
+      {% for shortcut in desktop.systemShortcuts %}
+      <div class="desktop-icon" 
+           id="shortcut-{{ shortcut.id }}" 
+           ondblclick="window.Explorer.openSystemDialog('{{ shortcut.action }}')">
+        <img src="{{ shortcut.icon }}" alt="{{ shortcut.title }}" />
+        <span class="icon-title">{{ shortcut.title }}</span>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <!-- Start Menu Popup -->
+  <div id="start-menu" class="win-outset">
+    <div class="start-menu-sidebar">
+      <span>Splitti OS</span>98
+    </div>
+    <div class="start-menu-items">
+      <div class="start-menu-item" onclick="window.Explorer.openFolder('photos'); window.Taskbar.closeStartMenu();">
+        <img src="/assets/images/icons/folder-photos.svg" alt="" />
+        <span>My Photos</span>
+      </div>
+      <div class="start-menu-item" onclick="window.Explorer.openFolder('diary'); window.Taskbar.closeStartMenu();">
+        <img src="/assets/images/icons/folder-diary.svg" alt="" />
+        <span>My Diary</span>
+      </div>
+      <div class="start-menu-item" onclick="window.Explorer.openFolder('documents'); window.Taskbar.closeStartMenu();">
+        <img src="/assets/images/icons/folder-docs.svg" alt="" />
+        <span>My Documents</span>
+      </div>
+      <div class="start-menu-divider"></div>
+      <div class="start-menu-item" onclick="window.Explorer.openSystemDialog('system-info'); window.Taskbar.closeStartMenu();">
+        <img src="/assets/images/icons/computer.svg" alt="" />
+        <span>System Properties</span>
+      </div>
+      <div class="start-menu-item" onclick="window.Explorer.openFile('documents', 0); window.Taskbar.closeStartMenu();">
+        <img src="/assets/images/icons/file-text.svg" alt="" />
+        <span>Readme Notes</span>
+      </div>
+      <div class="start-menu-divider"></div>
+      <div class="start-menu-item" onclick="alert('It is now safe to turn off your computer.'); window.Taskbar.closeStartMenu();">
+        <img src="/assets/images/start-avatar.png" alt="" class="start-icon-avatar" />
+        <span>Shut Down...</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Splitti OS 98 Taskbar -->
+  <div id="taskbar" class="win-outset">
+    <div class="start-button-wrapper">
+      <button id="start-btn" class="start-btn">
+        <img src="/assets/images/start-avatar.png" alt="Start" class="start-icon-avatar" />
+        <span>Start</span>
+      </button>
+    </div>
+
+    <div id="taskbar-tasks" class="taskbar-tasks">
+      <!-- Dynamic task buttons populated by Window Manager -->
+    </div>
+
+    <div class="system-tray win-inset-flat">
+      <div class="tray-icon" title="Network Connection - 56k Active">
+        <img id="tray-net-icon" src="/assets/images/icons/net-idle.svg" alt="Network" />
+      </div>
+      <div class="tray-icon" title="Audio Volume">
+        <img src="/assets/images/icons/sound.svg" alt="Volume" />
+      </div>
+      <div id="tray-clock" class="tray-clock" title="Click for Date">--:--</div>
+    </div>
+  </div>
 
   <script>
+    window.AUTO_OPEN_SLUG = {% if page.fileSlug and page.fileSlug != 'index' and page.fileSlug != 'src' %}{{ page.fileSlug | jsonify | safe }}{% else %}null{% endif %};
     window.WIN98_DESKTOP = {{ desktop | jsonify | safe }};
     window.WIN98_DATA = {
       photos: [
         {% for item in collections.photos %}
         {
+          slug: {{ item.fileSlug | jsonify | safe }},
+          url: {{ item.url | jsonify | safe }},
           title: {{ item.data.title | jsonify | safe }},
           date: {{ item.data.date | formatDate | jsonify | safe }},
           image: {{ item.data.image | jsonify | safe }},
@@ -33,6 +116,8 @@
       diary: [
         {% for item in collections.diary %}
         {
+          slug: {{ item.fileSlug | jsonify | safe }},
+          url: {{ item.url | jsonify | safe }},
           title: {{ item.data.title | jsonify | safe }},
           date: {{ item.data.date | formatDate | jsonify | safe }},
           mood: {{ item.data.mood | jsonify | safe }},
@@ -45,6 +130,8 @@
       documents: [
         {% for item in collections.documents %}
         {
+          slug: {{ item.fileSlug | jsonify | safe }},
+          url: {{ item.url | jsonify | safe }},
           title: {{ item.data.title | jsonify | safe }},
           date: {{ item.data.date | formatDate | jsonify | safe }},
           author: {{ item.data.author | jsonify | safe }},
@@ -54,6 +141,63 @@
         {% endfor %}
       ]
     };
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const desktopIcons = document.querySelectorAll('.desktop-icon');
+      const viewport = document.getElementById('desktop-viewport');
+
+      const clearAllSelection = () => {
+        desktopIcons.forEach(i => i.classList.remove('selected'));
+      };
+
+      if (viewport) {
+        viewport.addEventListener('click', (e) => {
+          if (e.target.id === 'desktop-viewport' || e.target.classList.contains('desktop-shortcuts')) {
+            clearAllSelection();
+          }
+        });
+        viewport.addEventListener('touchend', (e) => {
+          if (e.target.id === 'desktop-viewport' || e.target.classList.contains('desktop-shortcuts')) {
+            clearAllSelection();
+          }
+        });
+      }
+
+      desktopIcons.forEach(icon => {
+        let lastTap = 0;
+
+        icon.addEventListener('click', (e) => {
+          e.stopPropagation();
+          clearAllSelection();
+          icon.classList.add('selected');
+        });
+
+        icon.addEventListener('dblclick', () => {
+          clearAllSelection();
+        });
+
+        icon.addEventListener('touchend', (e) => {
+          const currentTime = new Date().getTime();
+          const tapLength = currentTime - lastTap;
+          
+          if (tapLength < 400 && tapLength > 0) {
+            clearAllSelection();
+            icon.dispatchEvent(new Event('dblclick'));
+            e.preventDefault();
+          } else {
+            clearAllSelection();
+            icon.classList.add('selected');
+          }
+          lastTap = currentTime;
+        });
+      });
+      
+      setTimeout(() => {
+        if (window.Explorer && typeof window.Explorer.openFromUrl === 'function') {
+          window.Explorer.openFromUrl();
+        }
+      }, 300);
+    });
   </script>
   <script src="/assets/js/window-manager.js"></script>
   <script src="/assets/js/taskbar.js"></script>

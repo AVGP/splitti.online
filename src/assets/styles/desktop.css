@@ -186,12 +186,40 @@
   background-color: var(--win-bg);
   border-top: 1px solid var(--win-shadow-dark);
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  gap: 6px;
   font-size: 11px;
+}
+
+.photo-details-grid {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  gap: 12px;
+}
+
+.photo-details-col {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.photo-details-right {
+  text-align: right;
 }
 
 .photo-details-panel strong {
   color: #000080;
+}
+
+.photo-description-box {
+  padding: 6px 8px;
+  background-color: #ffffff;
+  border-top: 1px solid var(--win-shadow-dark);
+  font-size: 11px;
+  color: #111111;
+  line-height: 1.35;
+  margin-top: 2px;
 }
 
 /* System Dialog Modal */

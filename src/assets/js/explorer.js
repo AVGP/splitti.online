@@ -6,9 +6,20 @@ class ExplorerApp {
     this.data = window.WIN98_DATA || {};
   }
 
+  updateUrlHash(slug) {
+    if (!slug) return;
+    if (history.replaceState) {
+      history.replaceState(null, '', '#' + slug);
+    } else {
+      window.location.hash = '#' + slug;
+    }
+  }
+
   openFolder(folderId) {
     const folderMeta = (window.WIN98_DESKTOP?.folders || []).find(f => f.id === folderId);
     if (!folderMeta) return;
+
+    this.updateUrlHash(folderId);
 
     const items = this.data[folderMeta.collection] || [];
     const windowId = `folder-${folderId}`;
@@ -109,6 +120,10 @@ class ExplorerApp {
     const item = items[index];
     if (!item) return;
 
+    if (item.slug) {
+      this.updateUrlHash(item.slug);
+    }
+
     if (folderId === "photos" || item.image) {
       this.openPhotoViewer(items, index);
     } else {
@@ -117,6 +132,10 @@ class ExplorerApp {
   }
 
   openNotepad(item) {
+    if (item.slug) {
+      this.updateUrlHash(item.slug);
+    }
+
     const windowId = `notepad-${item.title.replace(/[^a-zA-Z0-9]/g, "-")}`;
     const windowTitle = `${item.title} - Notepad`;
 
@@ -148,32 +167,45 @@ ${item.bodyHtml || item.rawContent}
 
   openPhotoViewer(items, currentIndex) {
     const item = items[currentIndex];
+    if (!item) return;
+
+    if (item.slug) {
+      this.updateUrlHash(item.slug);
+    }
+
     const windowId = `photo-viewer`;
     const windowTitle = `Imaging - [${item.title}]`;
+    const cameraName = "Minolta Dimage Xt";
 
     const contentHtml = `
       <div class="photo-viewer-container">
         <div class="photo-viewer-toolbar">
-          <div style="display: flex; gap: 4px;">
+          <div style="display: flex; gap: 4px; align-items: center;">
             <button class="win-btn" id="photo-prev-btn" ${currentIndex === 0 ? 'disabled' : ''}>◄ Prev</button>
             <button class="win-btn" id="photo-next-btn" ${currentIndex === items.length - 1 ? 'disabled' : ''}>Next ►</button>
           </div>
           <span style="font-size: 11px; font-weight: bold; color: #333;">${currentIndex + 1} of ${items.length}</span>
-          <button class="win-btn" onclick="alert('${(item.caption || item.title).replace(/'/g, "\\'")}')">Info</button>
         </div>
         <div class="photo-stage">
           <img src="${item.image}" id="photo-img-element" alt="${item.title}" />
         </div>
         <div class="photo-details-panel">
-          <div>
-            <strong>Title:</strong> ${item.title}<br/>
-            <strong>Date:</strong> ${item.date || 'N/A'}<br/>
-            <strong>Location:</strong> ${item.location || 'Unknown'}
+          <div class="photo-details-grid">
+            <div class="photo-details-col">
+              <div><strong>Title:</strong> ${item.title}</div>
+              <div><strong>Date:</strong> ${item.date || 'N/A'}</div>
+              <div><strong>Location:</strong> ${item.location || 'Unknown'}</div>
+            </div>
+            <div class="photo-details-col photo-details-right">
+              <div><strong>Camera:</strong> ${cameraName}</div>
+              <div><strong>EXIF Status:</strong> ${item.exif || 'sRGB ICC Profile'}</div>
+            </div>
           </div>
-          <div style="text-align: right;">
-            <strong>Camera:</strong> ${item.camera || 'Digicam'}<br/>
-            <strong>EXIF Status:</strong> ${item.exif || 'sRGB ICC Profile'}
-          </div>
+          ${item.caption ? `
+            <div class="photo-description-box win-inset-flat">
+              <strong>Description:</strong> ${item.caption}
+            </div>
+          ` : ''}
         </div>
       </div>
     `;
@@ -190,12 +222,11 @@ ${item.bodyHtml || item.rawContent}
         title: windowTitle,
         icon: "/assets/images/icons/file-image.svg",
         contentHtml,
-        width: 620,
-        height: 480
+        width: 640,
+        height: 520
       });
     }
 
-    // Prev / Next button listeners
     const prevBtn = winObj.element.querySelector("#photo-prev-btn");
     const nextBtn = winObj.element.querySelector("#photo-next-btn");
 
@@ -270,8 +301,82 @@ ${item.bodyHtml || item.rawContent}
       });
     }
   }
+
+  openFromUrl() {
+    let target = window.AUTO_OPEN_SLUG;
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const queryTarget = urlParams.get('file') || urlParams.get('open') || urlParams.get('photo') || urlParams.get('doc') || urlParams.get('folder');
+    if (queryTarget) {
+      target = queryTarget;
+    }
+
+    if (!queryTarget && window.location.hash) {
+      const hashVal = window.location.hash.replace(/^#\/?/, '');
+      if (hashVal) {
+        target = hashVal;
+      }
+    }
+
+    if (!target && window.location.pathname) {
+      const pathParts = window.location.pathname.split('/').filter(Boolean);
+      if (pathParts.length > 0) {
+        const lastPart = pathParts[pathParts.length - 1];
+        if (lastPart && lastPart !== 'index.html' && lastPart !== 'splendid-hopper') {
+          target = lastPart;
+        }
+      }
+    }
+
+    if (!target || target === 'index' || target === 'null') {
+      this.openFolder('documents');
+      return;
+    }
+
+    const lowerTarget = target.toLowerCase();
+    if (['photos', 'diary', 'documents'].includes(lowerTarget)) {
+      this.openFolder(lowerTarget);
+      return;
+    }
+
+    const collections = ['photos', 'diary', 'documents'];
+    let foundCollection = null;
+    let foundIndex = -1;
+
+    const normalizedTarget = lowerTarget.replace(/[^a-z0-9]/g, '');
+
+    for (const col of collections) {
+      const list = this.data[col] || [];
+      const idx = list.findIndex(item => {
+        if (!item) return false;
+        const slugNorm = (item.slug || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+        const titleNorm = (item.title || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+        const urlNorm = (item.url || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+        return slugNorm === normalizedTarget || titleNorm === normalizedTarget || (urlNorm && urlNorm.includes(normalizedTarget));
+      });
+
+      if (idx !== -1) {
+        foundCollection = col;
+        foundIndex = idx;
+        break;
+      }
+    }
+
+    if (foundCollection && foundIndex !== -1) {
+      this.openFolder(foundCollection);
+      this.openFile(foundCollection, foundIndex);
+    } else {
+      this.openFolder('documents');
+    }
+  }
 }
 
 document.addEventListener("DOMContentLoaded", () => {
   window.Explorer = new ExplorerApp();
+
+  window.addEventListener('hashchange', () => {
+    if (window.Explorer) {
+      window.Explorer.openFromUrl();
+    }
+  });
 });
