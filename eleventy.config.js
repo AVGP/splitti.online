@@ -46,6 +46,12 @@ module.exports = function(eleventyConfig) {
     });
   });
 
+  // polling because...ugh
+  eleventyConfig.setChokidarConfig({
+		usePolling: true,
+		interval: 500,
+	});
+
   return {
     dir: {
       input: "src",
