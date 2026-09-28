@@ -12,7 +12,7 @@ icon: /assets/images/icons/file-image.svg
 
 ### Black & White Portrait
 
-A monochrome black-and-white portrait capturing a thoughtful expression against soft indoor lighting and curtain backdrop.
+A monochrome black-and-white portrait capturing me on the morning of my wedding. I was so nervous and happy and overwhelmed at the same time!
 
 **EXIF Metadata Status:**
 - **Color Space:** sRGB ICC Profile (Preserved without stripping)
