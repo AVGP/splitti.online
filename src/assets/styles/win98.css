@@ -248,6 +248,10 @@ html, body {
   margin-top: 2px;
 }
 
+.win-content img {
+  max-width: 100%;
+}
+
 /* Menu Bar */
 .win-menubar {
   display: flex;

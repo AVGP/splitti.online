@@ -145,6 +145,14 @@
   color: #000080;
 }
 
+.notepad-editor img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 12px auto;
+  border: 1px solid var(--win-shadow-dark);
+}
+
 /* Photo Viewer */
 .photo-viewer-container {
   flex: 1;
