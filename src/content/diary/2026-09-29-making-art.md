@@ -19,4 +19,4 @@ It's refreshing and beautiful and brings peace to my mind.
 I really enjoy having the power to capture a moment and then create fine art prints from these moments.
 It allows me to focus on a moment and work with physical media, which is a slower process than other things I deal with.
 
-![A fresh print in the tray, washing off the chemicals](/assets/diary_photo_print.jpg)
+![A fresh print in the tray, washing off the chemicals](/assets/images/diary_photo_print.jpg)
