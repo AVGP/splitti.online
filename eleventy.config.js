@@ -1,3 +1,5 @@
+const { feedPlugin } = require("@11ty/eleventy-plugin-rss");
+
 module.exports = function(eleventyConfig) {
   // Passthrough static assets
   eleventyConfig.addPassthroughCopy({ "src/assets": "assets" });
@@ -52,7 +54,28 @@ module.exports = function(eleventyConfig) {
       return new Date(b.date) - new Date(a.date);
     });
   });
-  
+
+  // RSS feed please
+
+  eleventyConfig.addPlugin(feedPlugin, {
+    type: "rss", // or "rss", "json"
+    outputPath: "/feed.xml",
+    collection: {
+      name: "diary", // iterate over `collections.posts`
+      limit: 10,     // 0 means no limit
+      sort: "auto",  // or "descending", "ascending"
+    },
+    metadata: {
+      language: "en",
+      title: "Splitti 98 OS",
+      subtitle: "Let's boot into the old web",
+      base: "https://splitti.online/",
+      author: {
+        name: "Martin Splitt",
+      }
+    }
+  });
+
   // polling because...ugh
   eleventyConfig.setChokidarConfig({
 		usePolling: true,
