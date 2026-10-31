@@ -20,6 +20,14 @@ module.exports = {
       windowTitle: "C:\\My Documents\\My Diary"
     },
     {
+      id: "retrospectives",
+      title: "Weekly Retrospectives",
+      icon: "/assets/images/icons/folder-docs.svg",
+      collection: "retrospectives",
+      type: "retrospectives",
+      windowTitle: "C:\\My Documents\\Weekly Retrospectives"
+    },    
+    {
       id: "documents",
       title: "My Documents",
       icon: "/assets/images/icons/folder-docs.svg",

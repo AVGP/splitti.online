@@ -46,6 +46,13 @@ module.exports = function(eleventyConfig) {
     });
   });
 
+  // Retrospectives Collection
+  eleventyConfig.addCollection("retrospectives", function(collectionApi) {
+    return collectionApi.getFilteredByGlob("src/content/retrospectives/*.md").sort((a, b) => {
+      return new Date(b.date) - new Date(a.date);
+    });
+  });
+  
   // polling because...ugh
   eleventyConfig.setChokidarConfig({
 		usePolling: true,

@@ -47,6 +47,10 @@
         <img src="/assets/images/icons/folder-diary.svg" alt="" />
         <span>My Diary</span>
       </div>
+      <div class="start-menu-item" onclick="window.Explorer.openFolder('retrospectives'); window.Taskbar.closeStartMenu();">
+        <img src="/assets/images/icons/folder-docs.svg" alt="" />
+        <span>My Retrospectives</span>
+      </div>      
       <div class="start-menu-item" onclick="window.Explorer.openFolder('documents'); window.Taskbar.closeStartMenu();">
         <img src="/assets/images/icons/folder-docs.svg" alt="" />
         <span>My Documents</span>
@@ -130,6 +134,19 @@
       ],
       documents: [
         {% for item in collections.documents %}
+        {
+          slug: {{ item.fileSlug | jsonify | safe }},
+          url: {{ item.url | jsonify | safe }},
+          title: {{ item.data.title | jsonify | safe }},
+          date: {{ item.data.date | formatDate | jsonify | safe }},
+          author: {{ item.data.author | jsonify | safe }},
+          icon: {{ item.data.icon | jsonify | safe }},
+          bodyHtml: {{ item.templateContent | jsonify | safe }}
+        }{% if not loop.last %},{% endif %}
+        {% endfor %}
+      ],
+      retrospectives: [
+        {% for item in collections.retrospectives %}
         {
           slug: {{ item.fileSlug | jsonify | safe }},
           url: {{ item.url | jsonify | safe }},

@@ -332,9 +332,13 @@ ${item.bodyHtml || item.rawContent}
       this.openFolder('documents', true);
       return;
     }
+    if (cleanPath === '/content/retrospectives' || cleanPath === '/retrospectives') {
+      this.openFolder('retrospectives', true);
+      return;
+    }
 
     // 3. Search collections for item match by url or slug
-    const collections = ['photos', 'diary', 'documents'];
+    const collections = ['photos', 'diary', 'documents', 'retrospectives'];
     let foundCollection = null;
     let foundIndex = -1;
 
