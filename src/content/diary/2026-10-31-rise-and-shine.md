@@ -1,6 +1,6 @@
 ---
 title: 2026-10-31 - Rise and shine
-date:
+date:2026-10-31
 mood: Happy
 weather: Sunny 6°C
 tags: diary
