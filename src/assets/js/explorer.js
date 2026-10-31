@@ -273,7 +273,8 @@ ${item.bodyHtml || item.rawContent}
                 Eleventy 11ty Engine Version 3.0<br/><br/>
                 Computer:<br/>
                 Pentium II Processor<br/>
-                64.0 MB RAM
+                64.0 MB RAM<br/>
+                GeForce RTX 5070 Ti
               </div>
             </div>
             <div class="win-dialog-footer">
