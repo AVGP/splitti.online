@@ -22,4 +22,8 @@ These are fun and you know what? I might make them happen, too. Why not?
 
 But now, woken up, dressed and ready to take on the world, I will try to balance the day with something crafty, something artsy, some reading (Started reading "The Process", Kafka. Great story!) and some building as well.
 
+## Update at the end of the day
+
+Not only did I build something [extremely silly](https://aibullshit.bingo) but also something very useful: An instagram-like application that lives on the ATmosphere: [imagos.app](https://imagos.app) - it's an early prototype, but it works already!
+
 Toodles!
