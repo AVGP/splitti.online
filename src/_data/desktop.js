@@ -21,7 +21,7 @@ module.exports = {
     },
     {
       id: "retrospectives",
-      title: "Weekly Retrospectives",
+      title: "Weekly Retros",
       icon: "/assets/images/icons/folder-docs.svg",
       collection: "retrospectives",
       type: "retrospectives",
