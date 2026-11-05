@@ -31,6 +31,21 @@ I thought my life would involve a lot of helicopters and (for some reason I can'
 
 Some days, I'd prefer a quicksand pit to the spreadsheets but it's not too bad the way it is, either.
 
+## It's coming home
+
+Well. You might have caught that I am [critical of AI](https://thatsaweb.site/posts/the-convincing-machine/) and enjoy [poking fun at the mania around it](https://aibullshit.bingo).
+Yet, it is a tool. A great tool for the right purposes. But there are a few things that I think aren't thought out well yet.
+
+Number one: Uploading a bunch of sensitive information to random companies overseas (some of which have _very_ questionable ethics and morals). The other is consuming power like it's nothing and its datacenters kill the neighborhoods and towns they're situated in. That's seriously shitty.
+
+So, how about running an LLM locally? I play AAA videogames on the laptop I'm writing these lines on, surely it can run vector math for an LLM, no?
+
+So I looked around and learned how to run **models** locally. Models, fundamentally, are just files with lots of numbers in them. Then you need a **harness** to deal with input, running the model and output. I found [LM Studio](https://lmstudio.ai/) but that's proprietary and I don't wanna trade being tied to one company for being tied to another. The same is true for [Ollama](https://ollama.com/), another popular choice.
+
+So, fuck all of these. I found [Jan](https://www.jan.ai/) which is [open-source](https://github.com/janhq/jan). So I gave it a try and overestimated what my laptop could handle. After choosing an oversized model and waiting _a few minutes_ for an answer to a simple question, I chose a more size-appropriate model and gotta say: It's pretty great.
+
+If you run your LLM locally, not only do you not have to worry about leaking data to some third party, but you also don't have to worry about tokens and pricing and blah blah blah, so that's neat.
+
 ## Couch Potato time
 
 I'm still coughing, so I spare my team mates the nuisance and work from home. I work from the couch and so the end of the work day just seamlessly blends into couch potato time.
