@@ -5,6 +5,7 @@ mood: Liberated
 weather: Sunny 7°C
 tags: diary
 icon: /assets/images/icons/file-diary.svg
+---
 
 Dear Diary,
 
