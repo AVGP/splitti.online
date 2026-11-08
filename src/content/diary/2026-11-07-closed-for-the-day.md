@@ -1,6 +1,6 @@
 ---
 title: 2026-11-07 - closed for the day
-date: 2026-11-06
+date: 2026-11-07
 mood: Calm
 weather: Overcast 7°C
 tags: diary

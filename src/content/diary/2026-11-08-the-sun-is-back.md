@@ -1,6 +1,6 @@
 ---
 title: 2026-11-08 - the sun is back
-date: 2026-11-06
+date: 2026-11-08
 mood: Content
 weather: Sunny 12°C
 tags: diary
