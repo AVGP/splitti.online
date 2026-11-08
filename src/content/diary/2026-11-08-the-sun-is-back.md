@@ -12,6 +12,8 @@ But I know - nay, have learned - that in order to face the journey ahead, I need
 
 Today is not the start yet. So I shall remain seated.
 
+![Cozy cute cat](/assets/images/diary_cozy_mika.jpg)
+
 A friend brought a bunch of stuff for us, so I picked that up. Among the many things were zines I got for the zine advent calendar.
 It's so great and heart-warming to see these works of art, returned as a gratitude for the 24 zines that headed out beforehand.
 
