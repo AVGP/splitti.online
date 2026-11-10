@@ -392,7 +392,7 @@ icon: /assets/images/icons/file-text.svg
               </div>
             </td>
             <td>
-              <div class="cv-name">Martin (Naumann) Splitt <span class="cv-pronouns">(He/Him)</span></div>
+              <div class="cv-name">Martin Splitt <span class="cv-pronouns">(He/Him)</span></div>
               <div class="cv-headline">✨ Friendly internet fairy &amp; code magician ✨</div>
               <div class="cv-meta-grid">
                 <div><strong>📍 Location:</strong> Zurich, Switzerland</div>
