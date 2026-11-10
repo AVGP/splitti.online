@@ -29,7 +29,7 @@ interesting experiences in Johannesburg I'm a bit weary of trying to explore Cap
 
 ## Rumble in the jungle
 
-There's a bit of rumbling over in AI land. I notice, however, that LinkedIn (_insert unhealty noises here_) is still split in two camps: Either _AI is a deus ex machina_ fixing everything and if you're not running teams of agents at all time, are you even _alive_?
+There's a bit of rumbling over in AI land. I notice, however, that LinkedIn (_insert unhealthy noises here_) is still split in two camps: Either _AI is a deus ex machina_ fixing everything and if you're not running teams of agents at all time, are you even _alive_?
 
 Oh and the other camp that basically won't get tired to point out how the other camp _shares two brain cells, intermittently rubbing against each other_ and if you're joining them, you'll soon communicate primarily through grunting noises.
 
