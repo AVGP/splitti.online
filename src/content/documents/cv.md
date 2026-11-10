@@ -1,5 +1,5 @@
 ---
-title: CV.HTM - Curriculum Vitae (Netscape)
+title: cv.htm
 date: 1998-11-10
 author: Martin
 category: Resume
