@@ -31,4 +31,8 @@ icon: /assets/images/icons/file-text.svg
    [https://www.lomography.com](https://www.lomography.com)
    A company and website where people embrace low-quality photography. It is so much fun to just snap and share
 
+7. Kresimir's great CV website
+   [https://kresimircorluka.com/](https://kresimircorluka.com/)
+   Gorgeous example of how individual and fun a personal website can be! 
+
 Have a cool website? Show me! Email me at my-first-name [at] this domain :)
