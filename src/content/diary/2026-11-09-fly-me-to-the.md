@@ -12,6 +12,13 @@ Dear diary,
 🎶 Fly me to the 🎶 - uh. No, not the moon, to Cape Town, hah.
 Turns out John and I are going to Cape Town for...
 
+## Ratting it out
+
+I had a layover in Frankfurt airport. I'm really no fan of this airport but seeing a rat run across the food court is a new low point.
+FUN FACT - I emailed the "Gesundheitsamt" which told me they're not responsible and gave me an email address for the "Lebensmittelkontrolle" which is apparently the right point of contact.
+
+Tells me everything I need to know about digitalisation in Germany. I mean they could've just forwarded the email instead of throwing the ball back in my court. I let them know that I can help them and teach them how this "new media" stuff works - including the "electronic mail" thingy they are now facing.
+
 ## Search Central Live Cape Town
 
 So yeah, we'll run our second installment of SCL in South Africa in Cape Town this year.
