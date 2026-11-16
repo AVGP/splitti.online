@@ -267,7 +267,7 @@ ${item.bodyHtml || item.rawContent}
               <div class="win-dialog-message">
                 <strong>Splitti OS 98</strong><br/>
                 Second Edition<br/>
-                4.10.2222 A<br/><br/>
+                4.20.69 A<br/><br/>
                 Registered to:<br/>
                 Martin<br/>
                 Eleventy 11ty Engine Version 3.0<br/><br/>
