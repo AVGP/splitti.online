@@ -23,16 +23,20 @@ icon: /assets/images/icons/file-text.svg
    [https://thatsaweb.site](https://thatsaweb.site)
    The blog Eva and I write together, so much fun!
 
-5. Zines Forever
+5. IE is evil
+   [http://toastytech.com/evil/](http://toastytech.com/evil/)
+   The best way to remember the terror that was Internet Explorer
+
+7. Zines Forever
    [https://zinesforever.com](https://zinesforever.com)
    A collection of zines and a web tool to make your own and share with others
 
-6. Lomography
+8. Lomography
    [https://www.lomography.com](https://www.lomography.com)
    A company and website where people embrace low-quality photography. It is so much fun to just snap and share
 
-7. Kresimir's great CV website
+9. Kresimir's great CV website
    [https://kresimircorluka.com/](https://kresimircorluka.com/)
-   Gorgeous example of how individual and fun a personal website can be! 
+   Gorgeous example of how individual and fun a personal website can be!
 
 Have a cool website? Show me! Email me at my-first-name [at] this domain :)
