@@ -34,3 +34,6 @@ but it's not enough time to do that right now. We'll see how I'll deal with that
 ## Looking forward
 
 I'm looking forward to things to come, I'm excited for what the rest of the week will bring and I'm grateful for the people around me.
+I also finally grasped something that was spinning around in my head for quite a while: I am not going to put all my eggs in a single basket again.
+Plans I made will continue moving forward - and tomorrow is a milestone moment for that too - and I will carry on following my values and my heart.
+2027 is going to be "The year of doing the right things the right way". I'm excited!
