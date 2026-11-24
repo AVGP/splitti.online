@@ -42,7 +42,7 @@ Also talked to a bunch of friends today, one who I haven't talked to in a long t
 Remember that I moved my data to my own atproto PDS again and imported my entire spotify listening history into [teal.fm](https://teal.fm)? Yeah that was fun.
 I've wondered if I could build myself something that turns my listening history into a github-style heatmap per year.
 
-![My most active year on Spotify was 2022.](/assets/images/diary/spotify-heatmap-2022.jpg)
+![My most active year on Spotify was 2022.](/assets/images/diary_listening_heatmap.jpg)
 
 So, yeah, that exists. And if you're not on teal.fm, no worries. I also included a way to just upload the ZIP file Spotify gives you when you export your listening history.
 
