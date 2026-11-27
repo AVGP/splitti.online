@@ -1,0 +1,26 @@
+# Fast VPS deployment using a locally cross-compiled static Linux binary:
+#   CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -trimpath -ldflags="-s -w" -o guestbook .
+#   docker build -f Dockerfile.prebuilt -t splitti-guestbook .
+
+FROM alpine:3.21
+
+RUN addgroup -S guestbook && adduser -S -G guestbook guestbook \
+    && mkdir -p /data \
+    && chown -R guestbook:guestbook /data
+
+COPY guestbook /usr/local/bin/guestbook
+RUN chmod +x /usr/local/bin/guestbook
+
+ENV PORT=8080 \
+    DB_PATH=/data/guestbook.db \
+    ALLOWED_ORIGINS=https://splitti.online,https://www.splitti.online
+
+VOLUME ["/data"]
+EXPOSE 8080
+
+USER guestbook
+
+HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
+    CMD ["/usr/local/bin/guestbook", "-healthcheck"]
+
+ENTRYPOINT ["/usr/local/bin/guestbook"]
