@@ -22,7 +22,7 @@ import (
 	"unicode"
 	"unicode/utf8"
 
-	_ "modernc.org/sqlite"
+	_ "github.com/ncruces/go-sqlite3/driver"
 )
 
 const (
@@ -136,7 +136,7 @@ func openDB(dbPath string) (*sql.DB, error) {
 		}
 	}
 
-	db, err := sql.Open("sqlite", dbPath)
+	db, err := sql.Open("sqlite3", dbPath)
 	if err != nil {
 		return nil, fmt.Errorf("open sqlite db: %w", err)
 	}
