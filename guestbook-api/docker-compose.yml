@@ -1,0 +1,19 @@
+services:
+  guestbook:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: splitti-guestbook
+    restart: unless-stopped
+    ports:
+      - "${PORT:-8080}:8080"
+    environment:
+      PORT: "8080"
+      DB_PATH: "/data/guestbook.db"
+      ALLOWED_ORIGINS: "https://splitti.online,https://www.splitti.online"
+      RATE_LIMIT_PER_MIN: "10"
+    volumes:
+      - guestbook_data:/data
+
+volumes:
+  guestbook_data:
