@@ -255,6 +255,12 @@ ${item.bodyHtml || item.rawContent}
   }
 
   openSystemDialog(type) {
+    if (type === "guestbook") {
+      if (window.Guestbook && typeof window.Guestbook.open === "function") {
+        window.Guestbook.open();
+      }
+      return;
+    }
     if (type === "system-info") {
       window.WM.createWindow({
         id: "sys-info",
@@ -321,6 +327,12 @@ ${item.bodyHtml || item.rawContent}
 
     // 2. Check path for folder level routes
     const cleanPath = pathname.replace(/\/+$/, '');
+    if (cleanPath === '/guestbook') {
+      if (window.Guestbook && typeof window.Guestbook.open === "function") {
+        window.Guestbook.open(true);
+      }
+      return;
+    }
     if (cleanPath === '/content/photos' || cleanPath === '/photos') {
       this.openFolder('photos', true);
       return;

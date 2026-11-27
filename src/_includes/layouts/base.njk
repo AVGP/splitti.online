@@ -55,6 +55,10 @@
         <img src="/assets/images/icons/folder-docs.svg" alt="" />
         <span>My Documents</span>
       </div>
+      <div class="start-menu-item" onclick="window.Explorer.openSystemDialog('guestbook'); window.Taskbar.closeStartMenu();">
+        <img src="/assets/images/icons/guestbook.svg" alt="" />
+        <span>Guestbook</span>
+      </div>
       <div class="start-menu-divider"></div>
       <div class="start-menu-item" onclick="window.Explorer.openSystemDialog('system-info'); window.Taskbar.closeStartMenu();">
         <img src="/assets/images/icons/computer.svg" alt="" />
@@ -220,5 +224,6 @@
   <script src="/assets/js/window-manager.js"></script>
   <script src="/assets/js/taskbar.js"></script>
   <script src="/assets/js/explorer.js"></script>
+  <script src="/assets/js/guestbook.js"></script>
 </body>
 </html>

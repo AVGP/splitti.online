@@ -38,6 +38,12 @@ module.exports = {
   ],
   systemShortcuts: [
     {
+      id: "guestbook",
+      title: "Guestbook",
+      icon: "/assets/images/icons/guestbook.svg",
+      action: "guestbook"
+    },
+    {
       id: "computer",
       title: "My Computer",
       icon: "/assets/images/icons/computer.svg",
